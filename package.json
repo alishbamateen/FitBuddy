@@ -1,0 +1,10 @@
+{
+    "name": "whisper-bot",
+    "version": "1.0.0",
+    "description": "Deerhacks 2025 project",
+    "main": "index.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {}
+  }
