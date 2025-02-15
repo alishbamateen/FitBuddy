@@ -10,8 +10,8 @@ body {
     height: 100vh;
   }
   
-  /* Welcome Container */
-  .welcome-container {
+  /* Form Container */
+  .form-container {
     text-align: center;
     background-color: #ffffff; /* White background for the container */
     padding: 40px;
@@ -21,22 +21,47 @@ body {
     width: 100%;
   }
   
-  .welcome-container h1 {
+  .form-container h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 42px;
-    color: #00796b; /* Dark teal for a fitness vibe */
+    font-size: 36px;
+    color: #00796b; /* Dark teal for consistency */
     margin-bottom: 20px;
   }
   
-  .welcome-container p {
-    font-size: 20px;
-    color: #004d40; /* Slightly darker teal for contrast */
-    margin-bottom: 30px;
+  /* Form Group Styling */
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
   }
   
-  /* Button Styles */
+  .form-group label {
+    font-size: 18px;
+    color: #004d40; /* Darker teal for labels */
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #00bfa5; /* Bright teal for focus state */
+    outline: none;
+  }
+  
+  /* Button Styling */
   #continueButton {
-    padding: 15px 30px;
+    width: 100%;
+    padding: 15px;
     font-size: 18px;
     background-color: #00bfa5; /* Bright teal for the button */
     color: white;

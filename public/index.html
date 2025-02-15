@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Story Sharing App</title>
+  <title>Welcome to FitBuddy</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Share Your Story</h1>
-  
-  <textarea id="storyInput" placeholder="Write your story..."></textarea>
-  <button id="submitStory">Submit Story</button>
-  
-  <h2>Random Story</h2>
-  <div id="randomStory"></div>
-  <button id="fetchStory">Fetch Random Story</button>
-  
-  <script src="script.js"></script>
+  <div class="welcome-container">
+    <h1>Welcome to FitBuddy!</h1>
+    <p>Your personal workout guide to achieving your fitness goals.</p>
+    <button id="continueButton">Get Started</button>
+  </div>
+
+  <script>
+    document.getElementById('continueButton').addEventListener('click', () => {
+      window.location.href = 'user-details.html'; // Redirect to user details page
+    });
+  </script>
 </body>
 </html>

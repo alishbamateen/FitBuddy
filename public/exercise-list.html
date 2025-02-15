@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise List - FitBuddy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="exercise-container">
+    <h1>Exercises for <span id="bodyPartName"></span></h1>
+    <ul id="exerciseList">
+      <!-- Exercises will be listed here -->
+    </ul>
+    <button id="finishButton">Finish</button>
+  </div>
+
+  <script>
+    const bodyPart = new URLSearchParams(window.location.search).get('bodyPart');
+    document.getElementById('bodyPartName').textContent = bodyPart.charAt(0).toUpperCase() + bodyPart.slice(1); // Capitalize body part
+
+    // Fetch exercises based on the body part
+    const exercises = [
+      // Example static data, you can replace this with an API call
+      {
+        name: 'Squat',
+        equipment: 'None',
+        reps: 15,
+        sets: 3,
+        bodyPart: 'legs'
+      },
+      {
+        name: 'Push-up',
+        equipment: 'None',
+        reps: 10,
+        sets: 3,
+        bodyPart: 'arms'
+      }
+    ];
+
+    // Filter exercises for the selected body part
+    const filteredExercises = exercises.filter(exercise => exercise.bodyPart === bodyPart);
+
+    // Show filtered exercises
+    const exerciseList = document.getElementById('exerciseList');
+    filteredExercises.forEach(exercise => {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `${exercise.name} - ${exercise.reps} reps x ${exercise.sets} sets (${exercise.equipment})`;
+      exerciseList.appendChild(listItem);
+    });
+
+    // Event listener for the finish button
+    document.getElementById('finishButton').addEventListener('click', () => {
+      window.location.href = 'index.html'; // Go back to the homepage or show workout summary
+    });
+  </script>
+</body>
+</html>

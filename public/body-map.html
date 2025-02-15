@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Map - FitBuddy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="body-map-container">
+    <h1>Select a Body Part</h1>
+    <img src="body-diagram.png" alt="Body Diagram" usemap="#bodymap">
+
+    <map name="bodymap">
+      <area shape="rect" coords="100,100,150,150" href="exercise-list.html?bodyPart=legs" alt="Legs">
+      <area shape="rect" coords="200,100,250,150" href="exercise-list.html?bodyPart=arms" alt="Arms">
+      <area shape="rect" coords="300,100,350,150" href="exercise-list.html?bodyPart=chest" alt="Chest">
+      <area shape="rect" coords="400,100,450,150" href="exercise-list.html?bodyPart=back" alt="Back">
+      <area shape="rect" coords="500,100,550,150" href="exercise-list.html?bodyPart=shoulders" alt="Shoulders">
+    </map>
+  </div>
+</body>
+</html>
