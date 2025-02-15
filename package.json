@@ -4,7 +4,21 @@
     "description": "Deerhacks 2025 project",
     "main": "index.js",
     "scripts": {
-      "start": "node app.js"
+        "start": "node app.js"
     },
-    "dependencies": {}
-  }
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alishbamateen/whisperBot.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/alishbamateen/whisperBot/issues"
+    },
+    "homepage": "https://github.com/alishbamateen/whisperBot#readme",
+    "dependencies": {
+        "body-parser": "^1.20.3",
+        "express": "^4.21.2"
+    }
+}
