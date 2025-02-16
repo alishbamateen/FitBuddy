@@ -4,25 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Coach - FitBuddy</title>
-  <link rel="stylesheet" href="ai-coach.css"> <!-- Link to the new CSS file -->
+  <link rel="stylesheet" href="ai-coach.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="ai-coach-container">
-    <h1>Your AI-Generated Fitness Plan</h1>
-    <p>Here’s your personalized fitness plan, tailored just for you!</p>
+    <h1>AI Coach</h1>
+    <p>Enter your details to get a personalized workout plan.</p>
+
+    <!-- User Input Form -->
+    <form id="workoutForm">
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="non-binary">Non-Binary</option>
+      </select>
+
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" name="weight" required min="30" max="200">
+
+      <label for="height">Height (cm):</label>
+      <input type="number" id="height" name="height" required min="100" max="250">
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required min="10" max="100">
+
+      <label for="goal">Fitness Goal:</label>
+      <select id="goal" name="goal" required>
+        <option value="weight loss">Weight Loss</option>
+        <option value="muscle gain">Muscle Gain</option>
+        <option value="endurance">Endurance</option>
+        <option value="flexibility">Flexibility</option>
+      </select>
+
+      <label for="additional_preferences">Preferences:</label>
+      <input type="text" id="additional_preferences" name="additional_preferences" required placeholder="e.g., gym, home workout">
+
+      <label for="available_time_per_week">Available Time (minutes/week):</label>
+      <input type="number" id="available_time_per_week" name="available_time_per_week" required min="60" max="1000">
+
+      <button type="submit">Generate Plan</button>
+    </form>
 
     <!-- Plan Details -->
-    <div class="plan-details">
+    <div class="plan-details" id="planDetails" style="display: none;">
       <div class="plan-card">
-        <h2>Workout Plan</h2>
-        <p><strong>Day 1:</strong> Full Body Strength Training</p>
-        <p><strong>Day 2:</strong> Cardio and Core</p>
-        <p><strong>Day 3:</strong> Rest or Active Recovery</p>
-        <p><strong>Day 4:</strong> Upper Body Strength Training</p>
-        <p><strong>Day 5:</strong> Lower Body Strength Training</p>
-        <p><strong>Day 6:</strong> HIIT Workout</p>
-        <p><strong>Day 7:</strong> Rest or Stretching</p>
+        <h2>Your Weekly Workout Plan</h2>
+        <pre id="workoutPlan"></pre>
       </div>
     </div>
 
@@ -34,6 +63,42 @@
   </div>
 
   <script>
+    // Handle form submission
+    document.getElementById('workoutForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Collect form data
+      const formData = {
+        gender: document.getElementById('gender').value,
+        weight: parseFloat(document.getElementById('weight').value),
+        height: parseFloat(document.getElementById('height').value),
+        age: parseInt(document.getElementById('age').value),
+        goal: document.getElementById('goal').value,
+        additional_preferences: document.getElementById('additional_preferences').value,
+        available_time_per_week: parseInt(document.getElementById('available_time_per_week').value)
+      };
+
+      try {
+        // Send data to the backend
+        const response = await fetch('/generate-workout-plan', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        // Display the workout plan
+        document.getElementById('workoutPlan').textContent = data.workout_plan;
+        document.getElementById('planDetails').style.display = 'block';
+      } catch (error) {
+        console.error('Error generating workout plan:', error);
+        alert('Failed to generate workout plan. Please try again.');
+      }
+    });
+
     // Add functionality to buttons
     document.getElementById('editPlanButton').addEventListener('click', () => {
       alert('Edit Plan feature coming soon!');
