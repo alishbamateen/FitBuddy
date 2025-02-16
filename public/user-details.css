@@ -6,8 +6,9 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start; /* Align to the top to allow scrolling */
+    min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+    overflow-y: auto; /* Allow vertical scrolling */
   }
   
   /* Form Container */
@@ -19,6 +20,8 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     max-width: 500px;
     width: 100%;
+    margin: 20px; /* Add margin to prevent the container from touching the edges */
+    overflow-y: auto; /* Allow scrolling within the container if needed */
   }
   
   .form-container h1 {
@@ -56,6 +59,26 @@ body {
   .form-group select:focus {
     border-color: #00bfa5; /* Bright teal for focus state */
     outline: none;
+  }
+  
+  /* Checkbox Group Styling */
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .checkbox-group label {
+    font-size: 16px;
+    color: #004d40; /* Darker teal for labels */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
   }
   
   /* Button Styling */

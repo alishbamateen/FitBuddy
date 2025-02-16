@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Your Plan - FitBuddy</title>
+  <link rel="stylesheet" href="choose-plan.css"> <!-- Link to the new CSS file -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="choose-plan-container">
+    <h1>Choose Your Plan</h1>
+    <p>Select the type of fitness plan that works best for you:</p>
+
+    <div class="plan-options">
+      <!-- AI-Generated Plan -->
+      <div class="plan-card" id="aiPlan">
+        <h2>AI-Generated Fitness Plan</h2>
+        <p>Let FitBuddy create a personalized plan for you based on your goals and preferences.</p>
+      </div>
+
+      <!-- Custom Plan -->
+      <div class="plan-card" id="customPlan">
+        <h2>Create Your Own Plan</h2>
+        <p>Design your own workout routine tailored to your needs.</p>
+      </div>
+    </div>
+
+    <button id="continueButton">Continue</button>
+  </div>
+
+  <script>
+    // Add event listeners to the plan cards
+    const aiPlan = document.getElementById('aiPlan');
+    const customPlan = document.getElementById('customPlan');
+    const continueButton = document.getElementById('continueButton');
+
+    let selectedPlan = null;
+
+    aiPlan.addEventListener('click', () => {
+      selectedPlan = 'ai-generated';
+      aiPlan.classList.add('selected');
+      customPlan.classList.remove('selected');
+    });
+
+    customPlan.addEventListener('click', () => {
+      selectedPlan = 'custom';
+      customPlan.classList.add('selected');
+      aiPlan.classList.remove('selected');
+    });
+
+    // Handle continue button click
+    continueButton.addEventListener('click', () => {
+      if (!selectedPlan) {
+        alert('Please select a plan before continuing.');
+        return;
+      }
+
+      // Store the selected plan in localStorage
+      localStorage.setItem('selectedPlan', selectedPlan);
+
+      // Redirect to the appropriate page
+      if (selectedPlan === 'ai-generated') {
+        window.location.href = 'ai-coach.html'; // Redirect to AI Coach page
+      } else {
+        window.location.href = 'custom-plan.html'; // Redirect to custom plan page
+      }
+    });
+  </script>
+</body>
+</html>

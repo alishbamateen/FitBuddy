@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0f7fa; /* Light blue background for consistency */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto; /* Allow scrolling if needed */
+  }
+  
+  /* Choose Plan Container */
+  .choose-plan-container {
+    text-align: center;
+    background-color: #ffffff; /* White background for the container */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .choose-plan-container h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    color: #00796b; /* Dark teal for consistency */
+    margin-bottom: 20px;
+  }
+  
+  .choose-plan-container p {
+    font-size: 18px;
+    color: #004d40; /* Slightly darker teal for contrast */
+    margin-bottom: 30px;
+  }
+  
+  /* Plan Options */
+  .plan-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .plan-card {
+    background-color: #f9f9f9; /* Light gray background for cards */
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ddd; /* Light border */
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .plan-card:hover {
+    border-color: #00bfa5; /* Bright teal on hover */
+    transform: translateY(-5px); /* Slight lift effect */
+  }
+  
+  .plan-card.selected {
+    border-color: #00bfa5; /* Bright teal for selected card */
+    background-color: #e0f7fa; /* Light blue background for selected card */
+  }
+  
+  .plan-card h2 {
+    font-size: 24px;
+    color: #00796b; /* Dark teal for headings */
+    margin-bottom: 10px;
+  }
+  
+  .plan-card p {
+    font-size: 16px;
+    color: #004d40; /* Slightly darker teal for text */
+  }
+  
+  /* Continue Button */
+  #continueButton {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #00bfa5; /* Bright teal for the button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+  }
+  
+  #continueButton:hover {
+    background-color: #009688; /* Darker teal on hover */
+  }

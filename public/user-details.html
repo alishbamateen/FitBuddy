@@ -11,16 +11,25 @@
   <div class="form-container">
     <h1>Enter Your Details</h1>
     <form id="userForm">
+      <!-- First Name -->
       <div class="form-group">
-        <label for="name">First Name:</label>
-        <input type="text" id="name" required>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required>
       </div>
 
+      <!-- Last Name -->
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required>
+      </div>
+
+      <!-- Age -->
       <div class="form-group">
         <label for="age">Age:</label>
         <input type="number" id="age" required>
       </div>
 
+      <!-- Gender -->
       <div class="form-group">
         <label for="gender">Gender:</label>
         <select id="gender" required>
@@ -32,34 +41,65 @@
         </select>
       </div>
 
+      <!-- Weight -->
       <div class="form-group">
         <label for="weight">Weight (kg):</label>
         <input type="number" id="weight" required>
       </div>
 
+      <!-- Height -->
       <div class="form-group">
         <label for="height">Height (cm):</label>
         <input type="number" id="height" required>
       </div>
 
+      <!-- Reason for Joining -->
+      <div class="form-group">
+        <label>Reason for Joining:</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="reason" value="lose-weight"> Lose Weight</label>
+          <label><input type="checkbox" name="reason" value="build-muscle"> Build Muscle</label>
+          <label><input type="checkbox" name="reason" value="be-more-active"> Be More Active</label>
+          <label><input type="checkbox" name="reason" value="improve-health"> Improve Health</label>
+          <label><input type="checkbox" name="reason" value="energy"> Energy</label>
+          <label><input type="checkbox" name="reason" value="better-sleep"> Better Sleep</label>
+          <label><input type="checkbox" name="reason" value="look-better-feel-better"> Look Better, Feel Better</label>
+          <label><input type="checkbox" name="reason" value="improve-discipline"> Improve Discipline</label>
+          <label><input type="checkbox" name="reason" value="other"> Other</label>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
       <button type="submit" id="continueButton">Continue</button>
     </form>
   </div>
 
   <script>
     document.getElementById('userForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const userDetails = {
-        name: document.getElementById('name').value,
+        event.preventDefault();
+
+  // Get selected reasons
+  const reasons = [];
+  document.querySelectorAll('input[name="reason"]:checked').forEach(checkbox => {
+    reasons.push(checkbox.value);
+  });
+
+  // Store user details in localStorage
+    const userDetails = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
         age: document.getElementById('age').value,
         gender: document.getElementById('gender').value,
         weight: document.getElementById('weight').value,
         height: document.getElementById('height').value,
-      };
+        reasons: reasons, // Add selected reasons
+    };
 
-      localStorage.setItem('userDetails', JSON.stringify(userDetails)); // Store user details in localStorage
-      window.location.href = 'body-map.html'; // Redirect to body map page
-    });
+    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+
+    // Redirect to choose plan page
+    window.location.href = 'choose-plan.html';
+});
   </script>
 </body>
 </html>
