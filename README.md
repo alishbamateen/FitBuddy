@@ -36,7 +36,7 @@ FitBuddy is a web-based fitness application designed to help users achieve their
 ## How to Use 🚀
 #### Clone the Repository:
 ```
-git clone https://github.com/your-username/fitbuddy.git
+git clone https://github.com/alishbamateen/fitbuddy.git
 cd fitbuddy
 ```
 
