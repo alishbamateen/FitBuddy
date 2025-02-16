@@ -47,11 +47,93 @@
       <button type="submit">Generate Plan</button>
     </form>
 
-    <!-- Plan Details -->
+    <!-- Weekly Schedule -->
     <div class="plan-details" id="planDetails" style="display: none;">
-      <div class="plan-card">
-        <h2>Your Weekly Workout Plan</h2>
-        <pre id="workoutPlan"></pre>
+      <h2>Your Weekly Workout Plan</h2>
+      <div id="weeklySchedule" class="weekly-schedule">
+        <!-- Days will be dynamically inserted here -->
+      </div>
+    </div>
+
+    <!-- Non-AI Weekly Plan -->
+    <div class="custom-plan" id="customPlan" style="display: none;">
+      <h2>Create Your Own Plan</h2>
+      <div class="custom-plan-layout">
+        <!-- 7-Day Schedule -->
+        <div class="weekly-schedule-custom">
+          <div class="day-column" id="monday">
+            <h3>Monday</h3>
+            <div class="workouts-list"></div>
+            <button class="add-workout-btn" onclick="addWorkout('monday')">+</button>
+          </div>
+          <div class="day-column" id="tuesday">
+            <h3>Tuesday</h3>
+            <div class="workouts-list"></div>
+            <button class="add-workout-btn" onclick="addWorkout('tuesday')">+</button>
+          </div>
+          <div class="day-column" id="wednesday">
+            <h3>Wednesday</h3>
+            <div class="workouts-list"></div>
+            <button class="add-workout-btn" onclick="addWorkout('wednesday')">+</button>
+          </div>
+          <div class="day-column" id="thursday">
+            <h3>Thursday</h3>
+            <div class="workouts-list"></div>
+            <button class="add-workout-btn" onclick="addWorkout('thursday')">+</button>
+          </div>
+          <div class="day-column" id="friday">
+            <h3>Friday</h3>
+            <div class="workouts-list"></div>
+            <button class="add-workout-btn" onclick="addWorkout('friday')">+</button>
+          </div>
+          <div class="day-column" id="saturday">
+            <h3>Saturday</h3>
+            <div class="workouts-list"></div>
+            <button class="add-workout-btn" onclick="addWorkout('saturday')">+</button>
+          </div>
+          <div class="day-column" id="sunday">
+            <h3>Sunday</h3>
+            <div class="workouts-list"></div>
+            <button class="add-workout-btn" onclick="addWorkout('sunday')">+</button>
+          </div>
+        </div>
+
+        <!-- Workout Categories Sidebar -->
+        <div class="workout-categories">
+          <h3>Workout Categories</h3>
+          <div class="category" id="upperBody">
+            <h4>Upper Body</h4>
+            <ul>
+              <li>Bench Press</li>
+              <li>Pull-Ups</li>
+              <li>Dumbbell Shoulder Press</li>
+            </ul>
+          </div>
+          <div class="category" id="lowerBody">
+            <h4>Lower Body</h4>
+            <ul>
+              <li>Squats</li>
+              <li>Deadlifts</li>
+              <li>Lunges</li>
+            </ul>
+          </div>
+          <div class="category" id="core">
+            <h4>Core</h4>
+            <ul>
+              <li>Plank</li>
+              <li>Russian Twists</li>
+              <li>Leg Raises</li>
+            </ul>
+          </div>
+          <div class="category" id="cardio">
+            <h4>Cardio</h4>
+            <ul>
+              <li>Running</li>
+              <li>Cycling</li>
+              <li>Jump Rope</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -59,11 +141,12 @@
     <div class="button-group">
       <button id="editPlanButton">Edit Plan</button>
       <button id="savePlanButton">Save Plan</button>
+      <button id="createCustomPlanButton">Create Your Own Plan</button>
     </div>
   </div>
 
   <script>
-    // Handle form submission
+    // Handle form submission for AI-generated plan
     document.getElementById('workoutForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -88,16 +171,52 @@
           body: JSON.stringify(formData)
         });
 
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const data = await response.json();
 
-        // Display the workout plan
-        document.getElementById('workoutPlan').textContent = data.workout_plan;
+        // Display the weekly schedule
+        const weeklySchedule = document.getElementById('weeklySchedule');
+        weeklySchedule.innerHTML = ''; // Clear previous content
+
+        for (const [day, plan] of Object.entries(data)) {
+          const dayCard = document.createElement('div');
+          dayCard.className = 'day-card';
+          dayCard.innerHTML = `
+            <h3>${day}</h3>
+            <pre>${plan}</pre>
+          `;
+          weeklySchedule.appendChild(dayCard);
+        }
+
+        // Show the plan details section
         document.getElementById('planDetails').style.display = 'block';
       } catch (error) {
         console.error('Error generating workout plan:', error);
         alert('Failed to generate workout plan. Please try again.');
       }
     });
+
+    // Show the custom plan section
+    document.getElementById('createCustomPlanButton').addEventListener('click', () => {
+      document.getElementById('planDetails').style.display = 'none';
+      document.getElementById('customPlan').style.display = 'block';
+    });
+
+    // Function to add workouts to a day
+    function addWorkout(day) {
+      const workout = prompt("Enter the workout you want to add:");
+      if (workout) {
+        const dayColumn = document.getElementById(day);
+        const workoutsList = dayColumn.querySelector('.workouts-list');
+        const workoutItem = document.createElement('div');
+        workoutItem.className = 'workout-item';
+        workoutItem.textContent = workout;
+        workoutsList.appendChild(workoutItem);
+      }
+    }
 
     // Add functionality to buttons
     document.getElementById('editPlanButton').addEventListener('click', () => {

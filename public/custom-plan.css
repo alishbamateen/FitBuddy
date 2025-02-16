@@ -1,0 +1,70 @@
+/* Custom Plan Layout */
+.custom-plan-layout {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .weekly-schedule-custom {
+    display: flex;
+    gap: 15px;
+    flex: 3;
+  }
+  
+  .day-column {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    flex: 1;
+  }
+  
+  .day-column h3 {
+    font-size: 18px;
+    color: #00796b;
+    margin-bottom: 10px;
+  }
+  
+  .workouts-list {
+    min-height: 100px;
+  }
+  
+  .add-workout-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #00bfa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .workout-categories {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+  }
+  
+  .workout-categories h3 {
+    font-size: 18px;
+    color: #00796b;
+    margin-bottom: 10px;
+  }
+  
+  .category h4 {
+    font-size: 16px;
+    color: #004d40;
+    margin-bottom: 5px;
+  }
+  
+  .category ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .category li {
+    font-size: 14px;
+    color: #004d40;
+    margin-bottom: 5px;
+  }

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Plan - FitBuddy</title>
+  <link rel="stylesheet" href="ai-coach.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    .custom-plan-layout { display: flex; flex-direction: row; gap: 20px; }
+    .weekly-schedule-custom { flex: 3; display: flex; gap: 15px; flex-wrap: wrap; }
+    .day-column { flex: 1; min-width: 120px; }
+    .workout-categories { flex: 1; background-color: #f9f9f9; padding: 15px; border-radius: 10px; border: 2px solid #ddd; max-height: 400px; overflow-y: auto; }
+    .workout-item { cursor: grab; padding: 5px; background: #dff0d8; margin: 5px 0; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
+    .remove-btn { background: red; color: white; border: none; cursor: pointer; padding: 2px 5px; }
+    .drop-zone { min-height: 100px; background: #f0f0f0; padding: 10px; border: 2px dashed #ccc; }
+  </style>
+</head>
+<body>
+  <div class="ai-coach-container">
+    <h1>Create Your Custom Workout Plan</h1>
+    <p>Drag and drop workouts from the list to your weekly schedule.</p>
+
+    <div class="custom-plan-layout">
+      <div class="weekly-schedule-custom" id="weeklySchedule">
+        <div class="day-column" id="monday">
+          <h3>Monday</h3>
+          <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="day-column" id="tuesday">
+          <h3>Tuesday</h3>
+          <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="day-column" id="wednesday">
+          <h3>Wednesday</h3>
+          <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="day-column" id="thursday">
+          <h3>Thursday</h3>
+          <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="day-column" id="friday">
+          <h3>Friday</h3>
+          <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="day-column" id="saturday">
+          <h3>Saturday</h3>
+          <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="day-column" id="sunday">
+          <h3>Sunday</h3>
+          <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+      </div>
+
+      <div class="workout-categories">
+        <h3>Workout Categories</h3>
+        <div class="category" id="arms">
+          <h4>Arms</h4>
+          <div class="workout-list">
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Bicep Curls</div>
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Tricep Dips</div>
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Hammer Curls</div>
+          </div>
+        </div>
+        <div class="category" id="legs">
+          <h4>Legs</h4>
+          <div class="workout-list">
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Squats</div>
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Lunges</div>
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Leg Press</div>
+          </div>
+        </div>
+        <div class="category" id="glutes">
+          <h4>Glutes</h4>
+          <div class="workout-list">
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Hip Thrusts</div>
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Glute Bridges</div>
+          </div>
+        </div>
+        <div class="category" id="stretches">
+          <h4>Stretches</h4>
+          <div class="workout-list">
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Hamstring Stretch</div>
+            <div class="workout-item" draggable="true" ondragstart="drag(event)">Shoulder Stretch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button id="savePlanButton">Save Plan</button>
+      <button id="generatePDFButton">Download PDF</button>
+      <button id="resetPlanButton">Reset Plan</button>
+    </div>
+  </div>
+
+  <script>
+    function allowDrop(event) { event.preventDefault(); }
+    function drag(event) { event.dataTransfer.setData("text/plain", event.target.outerHTML); }
+    function drop(event) {
+      event.preventDefault();
+      const data = event.dataTransfer.getData("text/plain");
+      const dropZone = event.target.closest(".drop-zone");
+      if (dropZone) dropZone.innerHTML += data;
+    }
+
+    function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(16);
+      doc.text("Weekly Workout Plan", 10, 10);
+
+      const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+      let yPos = 20;
+
+      days.forEach((day, index) => {
+        const workouts = document.querySelectorAll(`#${day.toLowerCase()} .workout-item`);
+        doc.setFontSize(12);
+        doc.text(day, 10, yPos);
+        yPos += 10;
+
+        workouts.forEach(workout => {
+          doc.text(workout.innerText, 20, yPos);
+          yPos += 6;
+        });
+
+        yPos += 10;
+      });
+
+      doc.save("workout-plan.pdf");
+    }
+
+    document.getElementById("generatePDFButton").addEventListener("click", generatePDF);
+  </script>
+</body>
+</html>
