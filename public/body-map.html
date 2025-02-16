@@ -4,20 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Body Map - FitBuddy</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="body-map.css"> <!-- Link to the CSS file -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="body-map-container">
     <h1>Select a Body Part</h1>
-    <img src="body-diagram.png" alt="Body Diagram" usemap="#bodymap">
-
-    <map name="bodymap">
-      <area shape="rect" coords="100,100,150,150" href="exercise-list.html?bodyPart=legs" alt="Legs">
-      <area shape="rect" coords="200,100,250,150" href="exercise-list.html?bodyPart=arms" alt="Arms">
-      <area shape="rect" coords="300,100,350,150" href="exercise-list.html?bodyPart=chest" alt="Chest">
-      <area shape="rect" coords="400,100,450,150" href="exercise-list.html?bodyPart=back" alt="Back">
-      <area shape="rect" coords="500,100,550,150" href="exercise-list.html?bodyPart=shoulders" alt="Shoulders">
+    <img src="images/male-body.jpg" alt="Male Body Map" usemap="#bodyMap" class="body-image">
+    <map name="bodyMap">
+      <!-- Define clickable areas using <area> tags -->
+      <area shape="rect" coords="100,200,150,250" alt="Chest" href="chest.html" title="Chest">
+      <area shape="rect" coords="160,300,210,350" alt="Arms" href="arms.html" title="Arms">
+      <area shape="rect" coords="220,400,270,450" alt="Legs" href="legs.html" title="Legs">
+      <!-- Add more areas as needed -->
     </map>
+    <p id="hover-text">Hover over a body part to see its name.</p>
   </div>
+
+  <script>
+    // JavaScript to update hover text
+    const hoverText = document.getElementById('hover-text');
+    const areas = document.querySelectorAll('area');
+
+    areas.forEach(area => {
+      area.addEventListener('mouseover', () => {
+        hoverText.textContent = `Selected: ${area.title}`;
+      });
+      area.addEventListener('mouseout', () => {
+        hoverText.textContent = 'Hover over a body part to see its name.';
+      });
+    });
+  </script>
 </body>
 </html>

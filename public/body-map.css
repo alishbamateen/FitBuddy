@@ -1,0 +1,45 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0f7fa; /* Light blue background for consistency */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  /* Body Map Container */
+  .body-map-container {
+    background-color: #ffffff; /* White background for the container */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .body-map-container h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    color: #00796b; /* Dark teal for consistency */
+    margin-bottom: 20px;
+  }
+  
+  /* Body Image */
+  .body-image {
+    width: 100%; /* Make the image responsive */
+    max-width: 600px; /* Limit the maximum width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners for the image */
+    margin-bottom: 20px; /* Space between image and text */
+  }
+  
+  /* Hover Text */
+  #hover-text {
+    font-size: 18px;
+    color: #004d40; /* Slightly darker teal for contrast */
+    margin-top: 20px;
+  }
