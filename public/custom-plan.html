@@ -134,7 +134,54 @@
       doc.save("workout-plan.pdf");
     }
 
+    function savePlan() {
+      const plan = {}; 
+
+      document.querySelectorAll(".day-column").forEach(day => {
+          const dayName = day.id; 
+          const workouts = Array.from(day.querySelectorAll(".workout-item")).map(item => item.innerText);
+          plan[dayName] = workouts; 
+      });
+
+      localStorage.setItem("savedPlan", JSON.stringify(plan)); 
+      alert("Workout plan saved!");
+
+    }
+    function loadPlan() {
+    const savedPlan = localStorage.getItem("savedPlan");
+    
+    if (savedPlan) {
+        const plan = JSON.parse(savedPlan);
+
+        Object.keys(plan).forEach(day => {
+            const dropZone = document.querySelector(`#${day} .drop-zone`);
+            dropZone.innerHTML = ""; 
+            
+            plan[day].forEach(workout => {
+                const workoutItem = document.createElement("div");
+                workoutItem.classList.add("workout-item");
+                workoutItem.draggable = true;
+                workoutItem.ondragstart = drag;
+                workoutItem.innerText = workout;
+                
+                dropZone.appendChild(workoutItem);
+            });
+        });
+    }
+  }
+
+    function resetPlan() {
+      document.querySelectorAll(".drop-zone").forEach(zone => {
+        zone.innerHTML = "";
+      });
+      
+    }
+
+    window.addEventListener("load", loadPlan);
+
     document.getElementById("generatePDFButton").addEventListener("click", generatePDF);
+    document.getElementById("savePlanButton").addEventListener("click", savePlan);
+    document.getElementById("resetPlanButton").addEventListener("click", resetPlan);
   </script>
 </body>
 </html>
