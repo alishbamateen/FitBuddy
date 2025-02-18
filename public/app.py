@@ -20,6 +20,10 @@ def process():
     preference = data.get("preferences")
     time = data.get("available_time_per_week")
 
+
+    #print(f"Age: {age}, Gender: {gender}, Weight: {weight}, Height: {height}, Goal: {goal}, Preferences: {preference}, Time: {time}")
+
+
     prompt = f"""Create a whole wee personal plan for a {age} years old {gender}. Who weights {weight}kg and is {height}cm tall. 
     The want to workout {time} hours a week. The goal for the plan should be to {goal}. The workout should be according to a 
     {preference} workout. The plan should include warmup/stretches, exercises, and cooldown."""
