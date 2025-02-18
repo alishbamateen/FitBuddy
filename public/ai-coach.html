@@ -58,6 +58,42 @@
       <button type="submit">Generate Plan</button>
     </form>
 
+
+    <script>
+      document.getElementById("workoutForm").addEventListener("submit", function(event) {
+          event.preventDefault();
+  
+          const age = document.getElementById("age").value;
+          const weight = document.getElementById("weight").value;
+          const height = document.getElementById("height").value;
+          const goal = document.getElementById("goal").value;
+          const preferences = document.getElementById("preferences").value;
+          const available_time_per_week = document.getElementById("available_time_per_week").value;
+
+          
+  
+          fetch("/process", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ gender, age, weight, height, goal, preferences, available_time_per_week })
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Hide the form
+              document.getElementById("workoutForm").style.display = "none";
+              
+              // Display the weekly schedule
+              const weeklySchedule = document.getElementById('weeklySchedule');
+              weeklySchedule.innerHTML = `<pre>${data.plan}</pre>`;
+              
+              // Show the plan details section
+              document.getElementById('planDetails').style.display = 'block';
+          })
+          .catch(error => console.error("Error:", error));
+          
+      });
+  </script>
+
     <!-- Weekly Schedule -->
     <div class="plan-details" id="planDetails" style="display: none;">
       <h2>Your Weekly Workout Plan</h2>
